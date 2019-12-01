@@ -1,0 +1,60 @@
+{% load static pypiloader_templatetags %}
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+<form class="search" method="get">
+
+  <i class="fa fa-search search-icon"></i>
+  <input class="search-input" id="q" {% if request.GET.q %}value="{{ request.GET.q }}"{% endif %} name="q" type="text" placeholder="your search...">
+
+</form>
+
+{% for item in object_list %}
+  <div class="package__name package__item">
+      <h2> Package name:</h2> {{ item.name | default_if_none:"---" }}
+  </div>
+  <div class="package__description package__item">
+      <h3> Description: </h3> {{ item.description | truncatechars:200 | striptags | safe | default_if_none:"---" }}
+  </div>
+  <div class="package__current_version package__item">
+      <h3> Current Version: </h3> {{ item.current_version }}
+  </div>
+  <div class="package__current_version package__item">
+      <h3> Author: </h3> {{ item.author.first_name | default_if_none:"" }} {{ item.author.last_name | default_if_none:""}}  {{ item.author.email | default_if_none:"---"}}
+  </div>
+  <div class="package__current_version package__item">
+      <h3> Tags: </h3> {{ item.tags | default_if_none:"---" }}
+  </div>
+  <div class="package__current_version package__item">
+    <h3> Maintainers: </h3>
+    {% for maintainer in item.maintainers %}
+       {{ maintainer.first_name | default_if_none:"" }} {{ maintainer.last_name | default_if_none:""}}  {{ maintainer.email | default_if_none:""}}
+    {% endfor %}
+  </div> 
+
+  <hr class="striped-border">
+{% endfor %}
+
+{% if is_paginated %}
+  <div class="pagination">
+      <span class="page-links">
+          {% if page_obj.has_previous %}
+          <a class="pagination-action" href="?{% url_replace request 'page' page_obj.previous_page_number %}">
+          	<i class="fa fa-angle-left" aria-hidden="true"></i>
+          </a>
+          {% endif %}
+              <span class="pagination-current"> {{ page_obj.number }} </span>
+              <span class="pagination-of"> of </span>
+              <span class="pagination-total"> {{ page_obj.paginator.num_pages }}. </span>
+          {% if page_obj.has_next %}
+          <a class="pagination-action" href="?{% url_replace request 'page' page_obj.next_page_number %}">
+              <i class="fa fa-angle-right" aria-hidden="true"></i>
+          </a>
+          {% endif %}
+      </span>
+  </div>
+{% endif %}

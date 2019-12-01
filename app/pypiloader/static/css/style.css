@@ -1,0 +1,98 @@
+.search {
+  margin: 3em 0 1em 0;
+  position: relative; }
+  .search-icon {
+    position: absolute;
+    top: 0.8em;
+    left: 1em;
+    font-size: 20px;
+    color: #C6C6C6; }
+  .search-input {
+    width: 100%;
+    padding: 0.5em 0.8em;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding-left: 2.2em;
+    color: #1067BF;
+    font-size: 1.5em;
+    font-weight: 300; }
+
+::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  color: #ccc; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #ccc; }
+
+:-ms-input-placeholder {
+  /* IE 10+ */
+  color: #ccc; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #ccc; }
+
+.package__name {
+  font-size: 40px;
+  font-weight: 400; }
+
+.package__current_version {
+  font-size: 20px;
+  font-weight: 400; }
+
+.package__image__img {
+  width: 100%;
+  border-radius: 1px; }
+
+.package__description {
+  font-size: 1.2em;
+  line-height: 1.4em; }
+
+.package__read-more {
+  display: inline-block;
+  padding: 0.5em 0.8em;
+  background-color: #4ECB4E;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 1px; }
+
+.package__name {
+  margin-top: 1em; }
+
+.striped-border {
+    border: 1px dashed #000;
+    width: 80%;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 1em;
+}
+
+.pagination-number {
+    padding: 0.5em 0.8em;
+    border-radius: 2px;
+    color: #fff;
+    background-color: #6D85C7;
+}
+
+.pagination-number:hover, .pagination-current {
+    background-color: #3354AA;      
+}
+
+.pagination-action {
+    margin: 0 0.1em;
+    display: inline-block;
+    padding: 0.5em 0.5em;
+    color: #B9B9B9;
+    font-size: 1.3em;
+}
+
+.pagination-action:hover, .pagination-previous, .pagination-next {
+    color: #3354AA;  
+}

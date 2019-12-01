@@ -1,0 +1,61 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:11.0-alpine
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.1.0
+    container_name: elasticsearch
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+  web:
+    build: .
+    command: python3 manage.py runserver 0.0.0.0:8000
+    env_file: 
+      - local_env
+    volumes:
+      - ./app:/code 
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - redis
+      - elasticsearch
+    environment:
+      - WDB_SOCKET_SERVER=wdb
+      - WDB_NO_BROWSER_AUTO_OPEN=True
+  celeryworker:
+    build: . 
+    command: celery -A config.celery_app worker -l info
+    volumes:
+      - ./app:/code
+    env_file: 
+      - local_env
+    environment:
+      - WDB_SOCKET_SERVER=wdb
+      - WDB_NO_BROWSER_AUTO_OPEN=True
+    depends_on:
+      - db
+      - redis
+  celery-beat:
+    build: .
+    command: celery -A config.celery_app beat -l info
+    env_file: 
+      - local_env
+    volumes:
+      - ./app:/code
+    depends_on:
+      - db
+      - redis
+  wdb:               
+    image: kozea/wdb
+    ports:
+      - "1984:1984"
+
+volumes:
+  postgres_data:
