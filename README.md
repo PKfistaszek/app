@@ -13,6 +13,8 @@
   'ADMIN_ENABLED = False'
   ## Restore data
   Enter to  app_web_1 docker `docker exec -it app_web_1 bash` and run commad `python manage.py searchi_index --rebuild`
+  ## Warning 
+  If elasticsearch return error 78 run `sudo sysctl -w vm.max_map_count=262144`
   </content>
   <tabTrigger>readme</tabTrigger>
 </snippet>>

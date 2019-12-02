@@ -19,10 +19,10 @@ from django.urls import include, path
 
 
 urlpatterns = [
-    path('', include('pypiloader.urls')),
+    path("", include("pypiloader.urls")),
 ]
 
 if settings.ADMIN_ENABLED:
     urlpatterns += [
-        path('admin/', admin.site.urls),
+        path("admin/", admin.site.urls),
     ]

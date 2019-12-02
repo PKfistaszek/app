@@ -17,7 +17,7 @@ from .utils import PyPiDataDownloader
 logger = logging.getLogger(__name__)
 
 
-@periodic_task(run_every=(crontab(minute="*/1")), name="hello", ignore_result=True)
+@periodic_task(run_every=(crontab(hour="*/24")), ignore_result=True)
 def download_data():
     logger.info("Process is started")
     for package in yarg.newest_packages():
@@ -25,7 +25,7 @@ def download_data():
     logger.info("Process is finished")
 
 
-@task()
+@task(ingore_result=True)
 def download_package(package_name):
     downloader = PyPiDataDownloader(package_name)
     downloader.start_process()
