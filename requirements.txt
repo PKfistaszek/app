@@ -1,7 +1,7 @@
 Django==2.2.6
 coverage==4.5.4
 psycopg2-binary==2.8.3
-djangorestframework==3.10.3
+djangorestframework==3.11.2
 celery==4.2.1
 redis==3.3.11
 wdb==3.3.0 
